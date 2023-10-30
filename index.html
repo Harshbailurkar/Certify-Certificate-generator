@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Certificate Generator</title>
+    <link rel="stylesheet" href="assets/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <script src="vendor/joystick.js"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+  </head>
+  <body>
+    <header>
+      <div
+        style="
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+        "
+      >
+        <h1>Certificate Generator</h1>
+        <p>@MiniProject Ty</p>
+      </div>
+    </header>
+
+    <main id="main">
+      <div class="toolscontainer">
+        <div class="textforamtting">
+          <select id="fontfamily" class="font-family">
+            <option value="Arial">Arial</option>
+            <option value="Courier New">Courier New</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Helvetica">Helvetica</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Verdana">Verdana</option>
+            <option value="Comic Sans MS">Comic Sans MS</option>
+            <option value="Impact">Impact</option>
+            <option value="Lucida Console">Lucida Console</option>
+            <option value="Lucida Sans Unicode">Lucida Sans Unicode</option>
+          </select>
+          <select id="fontsize">
+            <option value="1">1x</option>
+            <option value="2">2x</option>
+            <option value="3">3x</option>
+            <option value="4">4x</option>
+            <option value="5">5x</option>
+            <option value="6">6x</option>
+            <option value="7">7x</option>
+            <option value="8">8x</option>
+            <option value="9">9x</option>
+            <option value="10">10x</option>
+          </select>
+          <select id="textalign">
+            <option value="left">Left</option>
+            <option value="center">Center</option>
+            <option value="right">Right</option>
+          </select>
+        </div>
+        <div class="textforamtting">
+          <button id="textbold" class="formattool" data-active="0">B</button>
+          <button id="textitalic" class="formattool" data-active="0">I</button>
+          <input type="color" id="textcolor" />
+          <div class="slidecontainer">
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value="80"
+              class="slider"
+              id="textopacity"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div id="containerdiv">
+          <div id="certificatediv">
+            <canvas id="certificatecanvas"></canvas>
+          </div>
+          <div class="downloadcontainer downloadfile">
+            <div>
+              Download as:
+              <select id="downloadtype">
+                <option value="png">PNG</option>
+                <option value="jpg">JPG</option>
+                <option value="pdf">PDF</option>
+              </select>
+            </div>
+            <div>
+              <button id="downloadbutton" class="button">Download</button>
+            </div>
+          </div>
+          <div class="downloadcontainer downloadzip">
+            <button id="downloadzipbutton" class="button">Download Zip</button>
+          </div>
+        </div>
+        <div id="asidebar">
+          <div id="editor"></div>
+          <div class="uploadcontainer">
+            <!-- Limit only Image Files -->
+            <label class="button uploadlabel">
+              Upload Data File(CSV/Excel)
+              <input
+                id="uploadcsv"
+                type="file"
+                class="button"
+                value="Upload Image"
+                accept=".csv,application/vnd.ms-excel,.xlt,application/vnd.ms-excel,.xla,application/vnd.ms-excel,.xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,.xltx,application/vnd.openxmlformats-officedocument.spreadsheetml.template,.xlsm,application/vnd.ms-excel.sheet.macroEnabled.12,.xltm,application/vnd.ms-excel.template.macroEnabled.12,.xlam,application/vnd.ms-excel.addin.macroEnabled.12,.xlsb,application/vnd.ms-excel.sheet.binary.macroEnabled.12"
+              />
+            </label>
+            <label class="button uploadlabel">
+              Your Template
+              <input
+                id="uploadimage"
+                type="file"
+                class="button"
+                value="Upload Image"
+                accept="image/*"
+              />
+            </label>
+          </div>
+          <div id="inputs">
+            <div>
+              <input type="checkbox" class="certcheck" />
+              <input
+                type="text"
+                value="Holder's Name"
+                data-fontsize="7"
+                data-font="Verdana"
+                data-textalign="center"
+                data-x="50"
+                data-y="42"
+                data-color="#000"
+                data-opacity="80"
+                data-bold="1"
+                data-italic="0"
+                class="certinputs"
+              />
+              <button class="delbutton"><i class="fa fa-trash"></i></button>
+            </div>
+            <div>
+              <input type="checkbox" class="certcheck" />
+              <input
+                type="text"
+                value="Organization's Name"
+                data-fontsize="4"
+                data-font="Verdana"
+                data-textalign="center"
+                data-x="50"
+                data-y="26"
+                data-color="#000"
+                data-opacity="80"
+                class="certinputs"
+                data-bold="0"
+                data-italic="0"
+              />
+
+              <button class="delbutton"><i class="fa fa-trash"></i></button>
+            </div>
+            <div>
+              <input type="checkbox" class="certcheck" />
+              <input
+                type="text"
+                value="using CERRT "
+                data-fontsize="3"
+                data-font="Verdana"
+                data-textalign="center"
+                data-x="50"
+                data-y="64"
+                data-color="#000"
+                data-opacity="80"
+                class="certinputs"
+                data-bold="0"
+                data-italic="0"
+              />
+              <button class="delbutton"><i class="fa fa-trash"></i></button>
+            </div>
+          </div>
+          <div class="optionscontainer">
+            <button id="addinput"><i class="fa fa-plus"></i> Add</button>
+          </div>
+          <div style="display: none; justify-content: center">
+            <div style="width: 128px; position: relative">
+              <img
+                src="https://www.cssscript.com/demo/touch-joystick-controller/images/joystick-base.png"
+              />
+              <div id="stick" style="position: absolute; left: 32px; top: 32px">
+                <img
+                  src="https://www.cssscript.com/demo/touch-joystick-controller/images/joystick-red.png"
+                  alt="controller"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div class="loaderbody">
+      <div>
+        <span id="progress">-/-</span>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip-utils/0.1.0/jszip-utils.min.js"></script>
+    <script src="assets/script.js"></script>
+  </body>
+</html>
